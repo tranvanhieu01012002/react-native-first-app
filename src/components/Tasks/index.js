@@ -2,12 +2,13 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import styles from './style'
 
-export default function Task() {
+export default function Task(props) {
+    const {task } = props.task;
     return (
-        <View style={styles.task}>
-            <Text style={styles.order}>01</Text>
-            <Text>Clean the floot</Text>
-            <Text>Done</Text>
+        <View style={styles.content}>
+            <Text  style={styles.task}>01</Text>
+            <Text  style={styles.task}>{task.task}</Text>
+            <Text  style={styles.task}>{task.status}</Text>
         </View>
     )
 }
