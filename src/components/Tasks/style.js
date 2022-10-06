@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
         maxWidth: "80%",
     },
     circle: {
-        height: 12,
-        width: 14,
+        height: 20,
+        width: 20,
         backgroundColor: "#55BCF6",
         borderRadius: 5,
         borderWidth: 2,

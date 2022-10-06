@@ -24,21 +24,22 @@ import Task from './src/components/Tasks';
         setTask("");
     };
 
-    const completeTask = (index) => {
-        let tasksCopy = [...tasks];
-        tasksCopy.splice(index, 1);
-        setTasks(tasksCopy);
+    const edit = (index) => {
+        // let tasksCopy = [...tasks];
+        // tasksCopy.splice(index, 1);
+        // setTasks(tasksCopy);
+        setTask(tasks.at(index))
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.taskWrapper}>
-                <Text style={styles.sectionTitle}>Today's tasks</Text>
+                <Text style={styles.sectionTitle}>Today's tasks </Text>
                 <View style={styles.items}>
                     {tasks.map((item, index) => {
                         return (
                             <TouchableOpacity
-                                onPress={()=>completeTask(index)}
+                                onPress={()=>edit(index)}
                                 key={index}
                             >
                                 <Task text={item} />
