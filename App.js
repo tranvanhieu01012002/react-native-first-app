@@ -1,117 +1,38 @@
-import React, {useState} from 'react';
-import {
-  Alert,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TextInput,TouchableOpacity
-} from 'react-native';
-// import styles from './src/assets/globalStyle';
-import Bar from './src/components/Bar';
-import Header from './src/components/Header';
-import TaskList from './src/components/TaskList';
-import Task from './src/components/Tasks';
+import { View, Text,StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 
+const App = () => {
 
- function App() {
-    const [task, setTask] = useState("");
-    const [tasks, setTasks] = useState([]);
+    const [count,setCount] = useState(0);
 
-    const addTask = () => {
-        setTasks([...tasks, task]);
-        setTask("");
-    };
-
-    const edit = (index) => {
-        // let tasksCopy = [...tasks];
-        // tasksCopy.splice(index, 1);
-        // setTasks(tasksCopy);
-        setTask(tasks.at(index))
-    };
-
+    const increaseCount = ()=>{
+        setCount(count + 1)
+    }
     return (
         <View style={styles.container}>
-            <View style={styles.taskWrapper}>
-                <Text style={styles.sectionTitle}>Today's tasks </Text>
-                <View style={styles.items}>
-                    {tasks.map((item, index) => {
-                        return (
-                            <TouchableOpacity
-                                onPress={()=>edit(index)}
-                                key={index}
-                            >
-                                <Task text={item} />
-                            </TouchableOpacity>
-                        );
-                    })}
-                </View>
-            </View>
-            <KeyboardAvoidingView
-                style={styles.writeTaskWrapper}
-                behavior="height"
-            >
-                <TextInput
-                    style={styles.input}
-                    placeholder="Add new task ..."
-                    value={task}
-                    onChangeText={(text) => setTask(text)}
-                />
-                <TouchableOpacity onPress={addTask}>
-                    <View style={styles.addWrapper}>
-                        <Text>+</Text>
-                    </View>
-                </TouchableOpacity>
-            </KeyboardAvoidingView>
+            <Text>Value: {count}</Text>
+            <TouchableOpacity 
+                onPress={increaseCount} 
+                style={styles.button}
+                >
+                    <Text>Click me</Text>
+            </TouchableOpacity>
         </View>
-    );
+    )
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#E8EAED",
+        justifyContent: 'center'
     },
-    taskWrapper: {
-        paddingTop: 80,
-        paddingHorizontal: 20,
-    },
-    items: {
-        marginTop: 20,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    input: {
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        backgroundColor: "#FFF",
-        borderRadius: 60,
-        width: 250,
-        borderWidth: 1,
-        borderColor: "#C0C0C0",
-    },
-    writeTaskWrapper: {
-        position: "absolute",
-        bottom: 60,
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignContent: "center",
-    },
-    addText: {},
-    addWrapper: {
-        width: 60,
-        height: 60,
-        backgroundColor: "#FFF",
-        borderRadius: 60,
-        justifyContent: "center",
-        alignItems: "center",
-        borderColor: "#C0C0C0",
-        borderWidth: 1,
-    },
+    button: {
+        padding: 30,
+        backgroundColor: 'blue',
+        textAlign: 'center'
+    }
 });
 
 export default App;
