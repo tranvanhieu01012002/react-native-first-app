@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     item: {
-        backgroundColor: "#FFF",
+        // backgroundColor: "#FFF",
         padding: 15,
         flexDirection: "row",
         alignItems: "center",

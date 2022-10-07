@@ -3,9 +3,8 @@ import React from 'react'
 import styles from './style'
 
 export default function Task(props) {
-    const {text} = props;
     return (
-        <View style={styles.item}>
+        <View style={[styles.item,{backgroundColor: props.bgColor}]}>
             <View style={styles.itemLeft}>
                 <TouchableOpacity style={styles.square}></TouchableOpacity>
                 <Text>{props.text}</Text>
