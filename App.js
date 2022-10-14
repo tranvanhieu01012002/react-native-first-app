@@ -1,127 +1,107 @@
-import React, {useState} from 'react';
-import {
-  Alert,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TextInput,TouchableOpacity
-} from 'react-native';
-// import styles from './src/assets/globalStyle';
-import Bar from './src/components/Bar';
-import Header from './src/components/Header';
-import TaskList from './src/components/TaskList';
-import Task from './src/components/Tasks';
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+const App = () => {
+  const [flexDirection, setflexDirection] = useState("column");
 
- function App() {
-    const [task, setTask] = useState("");
-    const [tasks, setTasks] = useState([]);
+  return (
+    <PreviewLayout
+      label="flexDirection"
+      values={["column", "row", "row-reverse", "column-reverse"]}
+      selectedValue={flexDirection}
+      setSelectedValue={setflexDirection}
+    >
+      <View
+        style={[styles.box, { backgroundColor: "powderblue" }]}
+      />
+      <View
+        style={[styles.box, { backgroundColor: "skyblue" }]}
+      />
+      <View
+        style={[styles.box, { backgroundColor: "steelblue" }]}
+      />
+    </PreviewLayout>
+  );
+};
 
-    const addTask = () => {
-        setTasks([...tasks, task]);
-        setTask("");
-    };
-
-    const edit = (index) => {
-        // let tasksCopy = [...tasks];
-        // tasksCopy.splice(index, 1);
-        // setTasks(tasksCopy);
-        setTask(tasks.at(index))
-    };
-
-    // return (
-    //     <View style={styles.container}>
-    //         <View style={styles.taskWrapper}>
-    //             <Text style={styles.sectionTitle}>Today's tasks </Text>
-    //             <View style={styles.items}>
-    //                 {tasks.map((item, index) => {
-    //                     return (
-    //                         <TouchableOpacity
-    //                             onPress={()=>edit(index)}
-    //                             key={index}
-    //                         >
-    //                             <Task text={item} />
-    //                         </TouchableOpacity>
-    //                     );
-    //                 })}
-    //             </View>
-    //         </View>
-    //         <KeyboardAvoidingView
-    //             style={styles.writeTaskWrapper}
-    //             behavior="height"
-    //         >
-    //             <TextInput
-    //                 style={styles.input}
-    //                 placeholder="Add new task ..."
-    //                 value={task}
-    //                 onChangeText={(text) => setTask(text)}
-    //             />
-    //             <TouchableOpacity onPress={addTask}>
-    //                 <View style={styles.addWrapper}>
-    //                     <Text>+</Text>
-    //                 </View>
-    //             </TouchableOpacity>
-    //         </KeyboardAvoidingView>
-    //     </View>
-    // );
-    return (
-        <View style={[styles.container, {
-          // Try setting `flexDirection` to `"row"`.
-          flexDirection: "column"
-        }]}>
-          <View style={{ flex: 1, backgroundColor: "red" }} />
-          <View style={{ flex: 2, backgroundColor: "darkorange" }} />
-          <View style={{ flex: 3, backgroundColor: "green" }} />
-        </View>
-      );
-}
+const PreviewLayout = ({
+  label,
+  children,
+  values,
+  selectedValue,
+  setSelectedValue,
+}) => (
+  <View style={{ padding: 10, flex: 1 }}>
+    <Text style={styles.label}>{label}</Text>
+    <View style={styles.row}>
+      {values.map((value) => (
+        <TouchableOpacity
+          key={value}
+          onPress={() => setSelectedValue(value)}
+          style={[
+            styles.button,
+            selectedValue === value && styles.selected,
+          ]}
+        >
+          <Text
+            style={[
+              styles.buttonLabel,
+              selectedValue === value && styles.selectedLabel,
+            ]}
+          >
+            {value}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+    <View style={[styles.container, { [label]: selectedValue }]}>
+      {children}
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#E8EAED",
-    },
-    taskWrapper: {
-        paddingTop: 80,
-        paddingHorizontal: 20,
-    },
-    items: {
-        marginTop: 20,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    input: {
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        backgroundColor: "#FFF",
-        borderRadius: 60,
-        width: 250,
-        borderWidth: 1,
-        borderColor: "#C0C0C0",
-    },
-    writeTaskWrapper: {
-        position: "absolute",
-        bottom: 60,
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignContent: "center",
-    },
-    addText: {},
-    addWrapper: {
-        width: 60,
-        height: 60,
-        backgroundColor: "#FFF",
-        borderRadius: 60,
-        justifyContent: "center",
-        alignItems: "center",
-        borderColor: "#C0C0C0",
-        borderWidth: 1,
-    },
+  container: {
+    flex: 1,
+    marginTop: 8,
+    backgroundColor: "aliceblue",
+  },
+  box: {
+    width: 50,
+    height: 50,
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 4,
+    backgroundColor: "oldlace",
+    alignSelf: "flex-start",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    minWidth: "48%",
+    textAlign: "center",
+  },
+  selected: {
+    backgroundColor: "coral",
+    borderWidth: 0,
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: "500",
+    color: "coral",
+  },
+  selectedLabel: {
+    color: "white",
+  },
+  label: {
+    textAlign: "center",
+    marginBottom: 10,
+    fontSize: 24,
+  },
 });
 
 export default App;
