@@ -31,41 +31,51 @@ import Task from './src/components/Tasks';
         setTask(tasks.at(index))
     };
 
+    // return (
+    //     <View style={styles.container}>
+    //         <View style={styles.taskWrapper}>
+    //             <Text style={styles.sectionTitle}>Today's tasks </Text>
+    //             <View style={styles.items}>
+    //                 {tasks.map((item, index) => {
+    //                     return (
+    //                         <TouchableOpacity
+    //                             onPress={()=>edit(index)}
+    //                             key={index}
+    //                         >
+    //                             <Task text={item} />
+    //                         </TouchableOpacity>
+    //                     );
+    //                 })}
+    //             </View>
+    //         </View>
+    //         <KeyboardAvoidingView
+    //             style={styles.writeTaskWrapper}
+    //             behavior="height"
+    //         >
+    //             <TextInput
+    //                 style={styles.input}
+    //                 placeholder="Add new task ..."
+    //                 value={task}
+    //                 onChangeText={(text) => setTask(text)}
+    //             />
+    //             <TouchableOpacity onPress={addTask}>
+    //                 <View style={styles.addWrapper}>
+    //                     <Text>+</Text>
+    //                 </View>
+    //             </TouchableOpacity>
+    //         </KeyboardAvoidingView>
+    //     </View>
+    // );
     return (
-        <View style={styles.container}>
-            <View style={styles.taskWrapper}>
-                <Text style={styles.sectionTitle}>Today's tasks </Text>
-                <View style={styles.items}>
-                    {tasks.map((item, index) => {
-                        return (
-                            <TouchableOpacity
-                                onPress={()=>edit(index)}
-                                key={index}
-                            >
-                                <Task text={item} />
-                            </TouchableOpacity>
-                        );
-                    })}
-                </View>
-            </View>
-            <KeyboardAvoidingView
-                style={styles.writeTaskWrapper}
-                behavior="height"
-            >
-                <TextInput
-                    style={styles.input}
-                    placeholder="Add new task ..."
-                    value={task}
-                    onChangeText={(text) => setTask(text)}
-                />
-                <TouchableOpacity onPress={addTask}>
-                    <View style={styles.addWrapper}>
-                        <Text>+</Text>
-                    </View>
-                </TouchableOpacity>
-            </KeyboardAvoidingView>
+        <View style={[styles.container, {
+          // Try setting `flexDirection` to `"row"`.
+          flexDirection: "column"
+        }]}>
+          <View style={{ flex: 1, backgroundColor: "red" }} />
+          <View style={{ flex: 2, backgroundColor: "darkorange" }} />
+          <View style={{ flex: 3, backgroundColor: "green" }} />
         </View>
-    );
+      );
 }
 
 const styles = StyleSheet.create({
