@@ -1,107 +1,204 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ThirdScreen from './src/screens/ThirdScreen';
 
-const App = () => {
-  const [flexDirection, setflexDirection] = useState("column");
+function FirstScreen() {
+    
+    const [direction, setDirection] = useState("ltr");
 
-  return (
-    <PreviewLayout
-      label="flexDirection"
-      values={["column", "row", "row-reverse", "column-reverse"]}
-      selectedValue={flexDirection}
-      setSelectedValue={setflexDirection}
-    >
-      <View
-        style={[styles.box, { backgroundColor: "powderblue" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "skyblue" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "steelblue" }]}
-      />
-    </PreviewLayout>
-  );
-};
+    return (
+      <PreviewLayout
+        label="direction"
+        selectedValue={direction}
+        values={["ltr", "rtl"]}
+        setSelectedValue={setDirection}>
+        <View
+          style={[styles.box, { backgroundColor: "powderblue" }]}
+        />
+        <View
+          style={[styles.box, { backgroundColor: "skyblue" }]}
+        />
+        <View
+          style={[styles.box, { backgroundColor: "steelblue" }]}
+        />
+      </PreviewLayout>
+    );
+}
 
+
+// 
 const PreviewLayout = ({
-  label,
-  children,
-  values,
-  selectedValue,
-  setSelectedValue,
-}) => (
-  <View style={{ padding: 10, flex: 1 }}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-      {values.map((value) => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => setSelectedValue(value)}
-          style={[
-            styles.button,
-            selectedValue === value && styles.selected,
-          ]}
-        >
-          <Text
+    label,
+    children,
+    values,
+    selectedValue,
+    setSelectedValue,
+  }) => (
+    <View style={{ padding: 10, flex: 1 }}>
+      <Text style={styles.label}>{label}</Text>
+      <View style={styles.row}>
+        {values.map((value) => (
+          <TouchableOpacity
+            key={value}
+            onPress={() => setSelectedValue(value)}
             style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
+              styles.button,
+              selectedValue === value && styles.selected,
             ]}
           >
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
+            <Text
+              style={[
+                styles.buttonLabel,
+                selectedValue === value && styles.selectedLabel,
+              ]}
+            >
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={[styles.container, { [label]: selectedValue }]}>
+        {children}
+      </View>
     </View>
-    <View style={[styles.container, { [label]: selectedValue }]}>
-      {children}
-    </View>
-  </View>
-);
+  );
 
-const styles = StyleSheet.create({
+
+
+
+
+
+
+
+
+// 
+
+function SecondScreen() {
+  const [position, setPosition] = useState('relative');
+  const values = ['relative', 'absolute'];
+
+  return (
+    <View style={{padding: 10, flex: 1}}>
+      <View style={styles.row}>
+        {values.map(value => (
+          <TouchableOpacity
+            key={value}
+            onPress={() => setPosition(value)}
+            style={[styles.button, position === value && styles.selected]}>
+            <Text
+              style={[
+                styles.buttonLabel,
+                position === value && styles.selectedLabel,
+              ]}>
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={styles.container}>
+        <View
+          style={[
+            styles.box,
+            {
+              top: 25,
+              left: 25,
+              position,
+              backgroundColor: 'powderblue',
+            },
+          ]}
+        />
+        <View
+          style={[
+            styles.box,
+            {
+              top: 50,
+              left: 50,
+              position,
+              backgroundColor: 'skyblue',
+            },
+          ]}
+        />
+        <View
+          style={[
+            styles.box,
+            {
+              top: 75,
+              left: 75,
+              position,
+              backgroundColor: 'steelblue',
+            },
+          ]}
+        />
+      </View>
+    </View>
+  );
+}
+
+
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="direction" component={FirstScreen} />
+      <Tab.Screen name="position" component={SecondScreen} />
+      <Tab.Screen name="justifyContent" component={ThirdScreen} />
+    </Tab.Navigator>
+  );
+}
+
+const styles = {
   container: {
     flex: 1,
     marginTop: 8,
-    backgroundColor: "aliceblue",
+    backgroundColor: 'grey',
   },
   box: {
     width: 50,
     height: 50,
   },
   row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   button: {
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 4,
-    backgroundColor: "oldlace",
-    alignSelf: "flex-start",
-    marginHorizontal: "1%",
+    backgroundColor: 'oldlace',
+    alignSelf: 'flex-start',
+    marginHorizontal: '1%',
     marginBottom: 6,
-    minWidth: "48%",
-    textAlign: "center",
+    minWidth: '48%',
+    textAlign: 'center',
   },
   selected: {
-    backgroundColor: "coral",
+    backgroundColor: 'coral',
     borderWidth: 0,
   },
   buttonLabel: {
     fontSize: 12,
-    fontWeight: "500",
-    color: "coral",
+    fontWeight: '500',
+    color: 'coral',
   },
   selectedLabel: {
-    color: "white",
+    color: 'white',
   },
   label: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: 10,
     fontSize: 24,
   },
-});
+};
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
