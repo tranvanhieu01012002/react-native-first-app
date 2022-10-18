@@ -1,27 +1,15 @@
-/* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ThirdScreen from './src/screens/ThirdScreen';
-import FirstScreen from './src/screens/FirstScreen';
-import SecondScreen from './src/screens/SecondScreen';
 
-const Tab = createBottomTabNavigator();
+import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import ProductScreen from './src/screens/ProductScreen'
+import { View, Text } from 'react-native';
 
-function MyTabs() {
+const App = () => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="direction" component={FirstScreen} />
-            <Tab.Screen name="position" component={SecondScreen} />
-            <Tab.Screen name="justifyContent" component={ThirdScreen} />
-        </Tab.Navigator>
-    );
+        <SafeAreaView>
+            <ProductScreen/>
+        </SafeAreaView>
+    )
 }
 
-export default function App() {
-    return (
-        <NavigationContainer>
-        <MyTabs />
-        </NavigationContainer>
-    );
-}
+export default App
