@@ -1,6 +1,6 @@
 import { View, Text, TextInput, ScrollView, FlatList } from 'react-native'
 import React from 'react'
-import Product from './Product'
+import {Product} from './Product';
 
 export default function TopProduct() {
     const data = [

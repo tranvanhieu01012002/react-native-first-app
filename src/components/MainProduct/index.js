@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Product from './Product'
-import styles from './style'
+import Product from './Product';
+import styles from './style';
 
 const MainProduct = () => {
     return (
@@ -24,4 +24,4 @@ const MainProduct = () => {
     )
 }
 
-export default MainProduct
+export default MainProduct;

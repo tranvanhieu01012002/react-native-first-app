@@ -19,7 +19,6 @@ const Product = () => {
                 </View>
         </View>
     )
-
 }
 
 export default Product;
