@@ -1,14 +1,13 @@
 
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View } from 'react-native'
 import ProductScreen from './src/screens/ProductScreen'
-import { View, Text } from 'react-native';
 
 const App = () => {
     return (
-        <SafeAreaView>
+        <View>
             <ProductScreen/>
-        </SafeAreaView>
+        </View>
     )
 }
 
